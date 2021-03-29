@@ -1,0 +1,62 @@
+frameworkVersion: ">= 2.31.0"
+
+service: slack-logs
+
+useDotenv: true
+variablesResolutionMode: 20210219
+unresolvedVariablesNotificationMode: error
+
+package:
+  exclude:
+    - '**/node_modules/aws-sdk/**'
+    - '**/node_modules/@types/**'
+
+custom:
+  build: npm run ${env:SLS_BUILD, 'build'}
+
+  scriptHooks:
+    'deploy:function:initialize': ${self:custom.build}
+    'package:initialize': ${self:custom.build}
+    'invoke:local:loadEnvVars': ${self:custom.build}
+
+  stage: ${opt:stage, env:STAGE, self:provider.stage}
+
+plugins:
+  - serverless-scriptable-plugin
+
+provider:
+  name: aws
+  lambdaHashingVersion: 20201221
+
+  apiGateway:
+    shouldStartNameWithService: true
+    minimumCompressionSize: 1024
+
+  runtime: nodejs14.x
+
+  memorySize: 128
+
+  environment:
+
+#  iam:
+#    role:
+#      statements:
+#        -
+
+functions:
+  TestGet:
+    handler: dist/handler/test/get.handle
+    events:
+      - http:
+          path: test
+          method: get
+
+
+resources:
+
+#  - Resources:
+#      # --------------------------------------------------------------------
+#      # Resources
+#      # --------------------------------------------------------------------
+#      SomeResource:
+#        Type: ..
