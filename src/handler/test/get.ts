@@ -1,14 +1,14 @@
 import { ok } from '@alexshelkov/result';
-import { creator, Handler, GetService, loggerService, transportService } from '@alexshelkov/lambda';
+import { Handler } from '@alexshelkov/lambda';
 
-const res = creator(transportService).srv(loggerService);
+import { Service, res } from '../../service';
 
-type Service = GetService<typeof res>;
+const handler: Handler<Service, {message: string}, never> = async ({ context, service: { logger, eventGateway } }) => {
+  const message = eventGateway.queryStringParameters?.message || 'hello';
 
-const handler: Handler<Service, string, never> = async ({ service: { logger } }) => {
-  logger.log('say hello');
+  logger.log(message);
 
-  return ok(`hello: ${new Date().toISOString().split('T')[1].slice(0, 8)}`);
+  return ok({message});
 };
 
 export const handle = res.ok(handler).req();

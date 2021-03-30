@@ -37,6 +37,7 @@ provider:
   memorySize: 128
 
   environment:
+    WEBHOOK_URL: ${env:WEBHOOK_URL}
 
 #  iam:
 #    role:
