@@ -1,10 +1,4 @@
-import {
-  creator,
-  transportService,
-  loggerService,
-  eventGatewayService,
-  GetService,
-} from '@alexshelkov/lambda';
+import { creator, transportService, loggerService, eventGatewayService } from '@alexshelkov/lambda';
 
 import { slackTransport } from './slack';
 
@@ -13,4 +7,4 @@ export const res = creator(transportService)
   .srv(eventGatewayService)
   .srv(loggerService);
 
-export type Service = GetService<typeof res>;
+export type Creator = typeof res;

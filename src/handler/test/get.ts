@@ -1,14 +1,16 @@
 import { ok } from '@alexshelkov/result';
-import { Handler } from '@alexshelkov/lambda';
+import { GetHandler } from '@alexshelkov/lambda';
 
-import { Service, res } from '../../service';
+import { Creator, res } from '../../service';
 
-const handler: Handler<Service, {message: string}, never> = async ({ context, service: { logger, eventGateway } }) => {
+const handler: GetHandler<Creator, { message: string }, never> = async ({
+  service: { logger, eventGateway },
+}) => {
   const message = eventGateway.queryStringParameters?.message || 'hello';
 
   logger.log(message);
 
-  return ok({message});
+  return ok({ message });
 };
 
 export const handle = res.ok(handler).req();

@@ -1,5 +1,5 @@
-import {fail, Err} from '@alexshelkov/result';
-import {addService, MiddlewareCreator, Transport} from '@alexshelkov/lambda';
+import { fail, Err } from '@alexshelkov/result';
+import { addService, MiddlewareCreator, Transport } from '@alexshelkov/lambda';
 
 import createSlackApi from './lib';
 
