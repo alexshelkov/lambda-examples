@@ -1,5 +1,5 @@
 {
-  "name": "slack-logs",
+  "name": "@alexshelkov/lambda-slack-logs",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -22,7 +22,7 @@
     ]
   },
   "dependencies": {
-    "@alexshelkov/lambda": "^1.5.3",
+    "@alexshelkov/lambda": "^1.5.4",
     "@alexshelkov/result": "^1.1.1",
     "@slack/webhook": "^6.0.0",
     "@types/aws-lambda": "^8.10.59",
