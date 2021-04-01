@@ -1,10 +1,6 @@
 const { IncomingWebhook } = require('@slack/webhook');
 
-export default (url: string): null | { send: (text: string) => Promise<unknown> } => {
-  if (!url) {
-    return null;
-  }
-
+export default (url: string): { send: (text: string) => Promise<unknown> } => {
   const webhook = new IncomingWebhook(url);
 
   return {

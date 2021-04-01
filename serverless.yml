@@ -37,7 +37,7 @@ provider:
   memorySize: 128
 
   environment:
-    WEBHOOK_URL: ${env:WEBHOOK_URL}
+#    WEBHOOK_URL: ${env:WEBHOOK_URL}
 
 #  iam:
 #    role:
@@ -51,6 +51,13 @@ functions:
       - http:
           path: test
           method: get
+
+  TestPost:
+    handler: dist/handler/test/post.handle
+    events:
+      - http:
+          path: test
+          method: post
 
 
 resources:

@@ -5,7 +5,9 @@ import createSlackApi from './lib';
 
 export type SlackTransportOptions = {};
 export type SlackTransportService = { transport: Transport };
-export type SlackTransportErrors = { type: 'NoWebhookUrl' } & Err;
+export type SlackTransportNoWebhookUrl = { type: 'SlackTransportNoWebhookUrl' } & Err;
+export type SlackTransportNotDeliverableError = { type: 'SlackTransportNotDeliverableError' } & Err;
+export type SlackTransportErrors = SlackTransportNoWebhookUrl | SlackTransportNotDeliverableError;
 export type SlackTransportDeps = { transport: Transport };
 
 export const slackTransport: MiddlewareCreator<
@@ -14,18 +16,24 @@ export const slackTransport: MiddlewareCreator<
   SlackTransportErrors,
   SlackTransportDeps
 > = () => {
-  const api = createSlackApi(process.env.WEBHOOK_URL || '');
+  if (!process.env.WEBHOOK_URL) {
+    throw fail<SlackTransportNoWebhookUrl>('SlackTransportNoWebhookUrl');
+  }
+
+  const api = createSlackApi(process.env.WEBHOOK_URL);
 
   return async (request, { destroy }) => {
     const sending: Promise<unknown>[] = [];
 
     destroy(async () => {
-      await Promise.all(sending);
+      try {
+        await Promise.all(sending);
+      } catch (err: unknown) {
+        throw fail<SlackTransportNotDeliverableError>('SlackTransportNotDeliverableError', {
+          message: err instanceof Error ? err.message : 'Unknown',
+        });
+      }
     });
-
-    if (!api) {
-      return fail('NoWebhookUrl');
-    }
 
     const { send } = api;
 
