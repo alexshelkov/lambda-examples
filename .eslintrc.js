@@ -2,7 +2,7 @@ const path = require('path');
 
 module.exports = {
   root: true,
-  plugins: ['prettier', 'import', 'jest'],
+  plugins: ['tsc', 'prettier', 'import', 'jest'],
   overrides: [
     {
       files: '*.js',
@@ -44,6 +44,8 @@ module.exports = {
       rules: {
         'no-param-reassign': 'off',
         'arrow-body-style': ['error', 'always'],
+        '@typescript-eslint/require-await': 'off',
+        'import/prefer-default-export': 'off',
         '@typescript-eslint/no-unused-vars': [
           'error',
           { varsIgnorePattern: '^_', argsIgnorePattern: '^_' },
