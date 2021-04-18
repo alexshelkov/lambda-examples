@@ -45,17 +45,17 @@ const joinedValidator: MiddlewareCreator<
   JoinedErrors,
   JoinedDeps,
   { event: APIGatewayProxyEvent; context: unknown }
-> = (options) => {
+> = (options, creator) => {
   return async (request, lifecycle) => {
     let validator: 'yup' | 'struct';
     let middleware;
 
     if (request.event.queryStringParameters?.validator === 'yup') {
       validator = 'yup';
-      middleware = yupService(options);
+      middleware = yupService(options, creator);
     } else {
       validator = 'struct';
-      middleware = structService(options);
+      middleware = structService(options, creator);
     }
 
     const service = await middleware(request, lifecycle);

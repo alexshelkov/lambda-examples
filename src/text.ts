@@ -19,7 +19,7 @@ export type Text = {
 
 // Struct ------------------------------------------------------------
 
-const StructSchema: Describe<Text> = object({
+export const StructSchema: Describe<Text> = object({
   type: enums(Object.values(LogTypes)),
   message: string(),
 });
@@ -30,12 +30,26 @@ export type StructService = GetServiceMdl<typeof structService>;
 
 export type StructErrors = GetErrorMdl<typeof structService>;
 
+// Struct dynamic -----------------------------------------------------
+
+// const StructSchema: Describe<Text> = object({
+//   type: enums(Object.values(LogTypes)),
+//   message: string(),
+// });
+
+// export const structDynamicService = structValidator({ text: StructSchema });
+//
+// export type StructDynamicService = GetServiceMdl<typeof structService>;
+//
+// export type StructErrors = GetErrorMdl<typeof structService>;
+
 // Yup ----------------------------------------------------------------
 
 export const YupSchema = yup.object({
   message: yup.string().defined(),
+  test: yup.number(),
   type: yup.mixed<LogTypes>().oneOf(Object.values(LogTypes)).defined(),
-});
+} as const);
 
 export const yupService = yupValidator({ text: YupSchema });
 

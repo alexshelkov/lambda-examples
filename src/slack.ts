@@ -1,8 +1,9 @@
-import { fail, Err } from '@alexshelkov/result';
+import { Err } from '@alexshelkov/result';
 import { addService, MiddlewareCreator, Transport } from '@alexshelkov/lambda';
 
 import createSlackApi from './lib';
 
+// eslint-disable-next-line @typescript-eslint/ban-types
 export type SlackTransportOptions = {};
 export type SlackTransportService = { transport: Transport };
 export type SlackTransportNoWebhookUrl = { type: 'SlackTransportNoWebhookUrl' } & Err;
@@ -15,9 +16,9 @@ export const slackTransport: MiddlewareCreator<
   SlackTransportService,
   SlackTransportErrors,
   SlackTransportDeps
-> = () => {
+> = (_o, { throws }) => {
   if (!process.env.WEBHOOK_URL) {
-    throw fail<SlackTransportNoWebhookUrl>('SlackTransportNoWebhookUrl');
+    throw throws<SlackTransportNoWebhookUrl>('SlackTransportNoWebhookUrl');
   }
 
   const api = createSlackApi(process.env.WEBHOOK_URL);
@@ -29,7 +30,7 @@ export const slackTransport: MiddlewareCreator<
       try {
         await Promise.all(sending);
       } catch (err: unknown) {
-        throw fail<SlackTransportNotDeliverableError>('SlackTransportNotDeliverableError', {
+        throws<SlackTransportNotDeliverableError>('SlackTransportNotDeliverableError', {
           message: err instanceof Error ? err.message : 'Unknown',
         });
       }

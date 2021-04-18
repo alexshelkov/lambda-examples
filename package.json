@@ -22,8 +22,8 @@
     ]
   },
   "dependencies": {
-    "@alexshelkov/lambda": "^1.5.10",
-    "@alexshelkov/result": "^1.1.2",
+    "@alexshelkov/lambda": "^1.7.3",
+    "@alexshelkov/result": "^1.1.3",
     "@slack/webhook": "^6.0.0",
     "@types/aws-lambda": "^8.10.59",
     "@types/axios": "^0.14.0",

@@ -1,6 +1,6 @@
 frameworkVersion: ">= 2.31.0"
 
-service: slack-logs
+service: lambda-examples
 
 useDotenv: true
 variablesResolutionMode: 20210219
@@ -66,12 +66,26 @@ functions:
           path: test/yup
           method: post
 
+  TestPostYupDynamic:
+    handler: dist/handler/test/postYupDynamic.handle
+    events:
+      - http:
+          path: test/yup/dyn
+          method: post
+
   TestPostStruct:
     handler: dist/handler/test/postStruct.handle
     events:
       - http:
           path: test/struct
           method: post
+
+  TestCache:
+    handler: dist/handler/test/cache.handle
+    events:
+      - http:
+          path: test/cache
+          method: get
 
 
 resources:
