@@ -10,7 +10,7 @@ import {
   AwsEvent,
   addService,
   fail,
-} from '@alexshelkov/lambda';
+} from 'lambda-mdl';
 
 import { ObjectSchema, Asserts, ValidationError } from 'yup';
 import { ObjectShape } from 'yup/lib/object';

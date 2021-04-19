@@ -1,5 +1,5 @@
-import { ok } from '@alexshelkov/result';
-import { GetHandler } from '@alexshelkov/lambda';
+import { ok } from 'lambda-res';
+import { GetHandler } from 'lambda-mdl';
 
 import { jsonRes as res } from '../../service';
 import { LogTypes, structService } from '../../text';

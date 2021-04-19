@@ -1,5 +1,5 @@
-import { ok } from '@alexshelkov/result';
-import { GetHandler } from '@alexshelkov/lambda';
+import { ok } from 'lambda-res';
+import { GetHandler } from 'lambda-mdl';
 
 import { Creator, res } from '../../service';
 

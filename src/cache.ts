@@ -1,4 +1,4 @@
-import { ok, fail, Err } from '@alexshelkov/result';
+import { ok, fail, Err } from 'lambda-res';
 import {
   MiddlewareCreator,
   HandlerError,
@@ -8,7 +8,7 @@ import {
   EventGatewayService,
   routeError,
   addService,
-} from '@alexshelkov/lambda';
+} from 'lambda-mdl';
 
 export type CacheService = { store: (name: string, message: string) => void };
 export type CacheFoundError = { type: 'CacheFoundError'; data: { name: string; message: string } };

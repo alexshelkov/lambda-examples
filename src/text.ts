@@ -1,4 +1,4 @@
-import { GetServiceMdl, GetErrorMdl } from '@alexshelkov/lambda';
+import { GetServiceMdl, GetErrorMdl } from 'lambda-mdl';
 
 import { object, string, Describe, enums } from 'superstruct';
 import * as yup from 'yup';

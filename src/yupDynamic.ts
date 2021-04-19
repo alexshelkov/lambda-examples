@@ -1,4 +1,4 @@
-import { Middleware } from '@alexshelkov/lambda';
+import { Middleware } from 'lambda-mdl';
 
 import { ObjectShape, Helper, Service, YupErrors, YupDeps, yupMiddleware } from './yup';
 

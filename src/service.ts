@@ -4,7 +4,7 @@ import {
   loggerService,
   eventGatewayService,
   jsonBodyService,
-} from '@alexshelkov/lambda';
+} from 'lambda-mdl';
 
 import { slackTransport } from './slack';
 

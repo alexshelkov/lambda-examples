@@ -1,11 +1,11 @@
-import { Err, fail } from '@alexshelkov/result';
+import { Err, fail } from 'lambda-res';
 import {
   MiddlewareCreator,
   JsonBodyService,
   EventGatewayService,
   ServiceOptions,
   addService,
-} from '@alexshelkov/lambda';
+} from 'lambda-mdl';
 
 import { StructError, Describe, create } from 'superstruct';
 
