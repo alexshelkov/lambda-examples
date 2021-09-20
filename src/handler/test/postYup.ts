@@ -1,5 +1,4 @@
-import { ok } from 'lambda-res';
-import { GetHandler } from 'lambda-mdl';
+import { GetHandler, ok } from 'lambda-mdl';
 
 import { jsonRes as res } from '../../service';
 import { LogTypes, yupService } from '../../text';

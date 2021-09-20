@@ -1,11 +1,13 @@
-import { ok, fail, Err } from 'lambda-res';
 import {
+  Err,
   MiddlewareCreator,
   HandlerError,
   ServiceOptions,
   RequestError,
   AwsEvent,
   EventGatewayService,
+  ok,
+  fail,
   routeError,
   addService,
 } from 'lambda-mdl';
@@ -69,6 +71,3 @@ const cacheFound: HandlerError<
 };
 
 export const cacheCheck = routeError(isCacheErr)(cacheFound);
-
-// creator
-// bundle(srv, ok, err, transform)

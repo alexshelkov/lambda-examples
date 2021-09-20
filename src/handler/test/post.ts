@@ -1,4 +1,3 @@
-import { ok, fail } from 'lambda-res';
 import {
   Request,
   route,
@@ -8,6 +7,8 @@ import {
   JsonBodyService,
   EventGatewayService,
   ServiceOptions,
+  ok,
+  fail,
 } from 'lambda-mdl';
 import { APIGatewayProxyEvent } from 'aws-lambda';
 

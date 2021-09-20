@@ -1,5 +1,4 @@
-import { Err } from 'lambda-res';
-import { addService, MiddlewareCreator, Transport } from 'lambda-mdl';
+import { Err, MiddlewareCreator, Transport, addService } from 'lambda-mdl';
 
 import createSlackApi from './lib';
 

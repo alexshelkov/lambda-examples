@@ -22,8 +22,7 @@
     ]
   },
   "dependencies": {
-    "lambda-mdl": "^1.0.0",
-    "lambda-res": "^1.0.0",
+    "lambda-mdl": "^1.0.16",
     "@slack/webhook": "^6.0.0",
     "@types/aws-lambda": "^8.10.59",
     "@types/axios": "^0.14.0",
