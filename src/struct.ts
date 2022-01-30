@@ -13,7 +13,7 @@ import { StructError, Describe, create } from 'superstruct';
 type Helper<Schemas> = {
   [k in keyof Schemas]: Schemas[k] extends Describe<infer Schema> ? Describe<Schema> : never;
 };
-type Services<Schemas> = {
+type Fields<Schemas> = {
   [k in keyof Schemas]: Schemas[k] extends Describe<infer Schema> ? Schema : never;
 };
 type Service<Schema> = Schema extends Describe<infer T> ? T : never;
@@ -27,7 +27,7 @@ export type StructErrors = StructValidationError;
 
 export const structValidator = <Schemas extends Helper<Schemas>>(
   schemas: Schemas
-): MiddlewareCreator<ServiceOptions, Services<Schemas>, StructErrors, StructDeps> => {
+): MiddlewareCreator<ServiceOptions, { fields: Fields<Schemas> }, StructErrors, StructDeps> => {
   return () => {
     return async (request) => {
       let body: unknown;
@@ -40,7 +40,7 @@ export const structValidator = <Schemas extends Helper<Schemas>>(
         body = request.service.eventGateway.queryStringParameters || {};
       }
 
-      const services = {} as Services<Schemas>;
+      const fields = {} as Fields<Schemas>;
 
       // eslint-disable-next-line no-restricted-syntax
       for (const name in schemas) {
@@ -50,7 +50,7 @@ export const structValidator = <Schemas extends Helper<Schemas>>(
           try {
             const service = create(body, schema);
 
-            services[name] = service as Service<Schemas[typeof name]>;
+            fields[name] = service as Service<Schemas[typeof name]>;
           } catch (err) {
             if (err instanceof StructError) {
               return fail('StructValidationError', { validation: err });
@@ -60,7 +60,7 @@ export const structValidator = <Schemas extends Helper<Schemas>>(
         }
       }
 
-      return addService(request, services);
+      return addService(request, { fields });
     };
   };
 };

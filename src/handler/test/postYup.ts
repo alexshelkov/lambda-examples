@@ -6,9 +6,9 @@ import { LogTypes, yupService } from '../../text';
 const resValid = res.srv(yupService);
 
 const handler: GetHandler<typeof resValid, { message: string; type: LogTypes }, never> = async ({
-  service: { logger, text },
+  service: { logger, fields: { text } },
 }) => {
-  const { message, type } = text;
+  const { message, type, test } = text;
 
   logger.log(message);
 

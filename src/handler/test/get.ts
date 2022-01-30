@@ -1,8 +1,8 @@
 import { GetHandler, ok } from 'lambda-mdl';
 
-import { Creator, res } from '../../service';
+import { res } from '../../service';
 
-const handler: GetHandler<Creator, { message: string }, never> = async ({
+const handler: GetHandler<typeof res, { message: string }, never> = async ({
   service: { logger, eventGateway },
 }) => {
   const message = eventGateway.queryStringParameters?.message || 'hello';

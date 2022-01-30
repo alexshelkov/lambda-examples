@@ -13,8 +13,4 @@ export const res = creator(transportService)
   .srv(loggerService)
   .srv(eventGatewayService);
 
-export type Creator = typeof res;
-
 export const jsonRes = res.srv(jsonBodyService);
-
-export type JsonCreator = typeof jsonRes;

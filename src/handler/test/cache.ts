@@ -1,19 +1,19 @@
 import { GetHandler, ok } from 'lambda-mdl';
 
 import { res } from '../../service';
-import { cacheService, cacheCheck } from '../../cache';
+import { pack } from '../../cache';
 
-const res2 = res.srv(cacheService).fail(cacheCheck);
+const res2 = res.pack(pack);
 
 const handler: GetHandler<
   typeof res2,
   { name: string; message: string; cache: false },
   never
-> = async ({ service: { eventGateway, store } }) => {
+> = async ({ service: { eventGateway, cache } }) => {
   const name = eventGateway.queryStringParameters?.name || 'alex';
   const message = eventGateway.queryStringParameters?.message || 'hello';
 
-  store(name, message);
+  cache.store(name, message);
 
   return ok({ name, message, cache: false });
 };
