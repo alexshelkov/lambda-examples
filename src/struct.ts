@@ -19,10 +19,7 @@ type Fields<Schemas> = {
 type Service<Schema> = Schema extends Describe<infer T> ? T : never;
 type StructDeps = JsonBodyService | EventGatewayService | (JsonBodyService & EventGatewayService);
 
-export type StructValidationError = {
-  type: 'StructValidationError';
-  validation: StructError;
-} & Err;
+export type StructValidationError = Err<'StructValidationError', { validation: StructError }>;
 export type StructErrors = StructValidationError;
 
 export const structValidator = <Schemas extends Helper<Schemas>>(

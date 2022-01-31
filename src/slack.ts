@@ -3,8 +3,8 @@ import { IncomingWebhook } from '@slack/webhook';
 
 export type SlackTransportOptions = {};
 export type SlackTransportService = { transport: Transport };
-export type SlackTransportNoWebhookUrl = { type: 'SlackTransportNoWebhookUrl' } & Err;
-export type SlackTransportNotDeliverableError = { type: 'SlackTransportNotDeliverableError' } & Err;
+export type SlackTransportNoWebhookUrl = Err<'SlackTransportNoWebhookUrl'>;
+export type SlackTransportNotDeliverableError = Err<'SlackTransportNotDeliverableError'>;
 export type SlackTransportErrors = SlackTransportNoWebhookUrl | SlackTransportNotDeliverableError;
 export type SlackTransportDeps = { transport: Transport };
 
